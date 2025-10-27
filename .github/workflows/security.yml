@@ -1,0 +1,49 @@
+name: Security Scanning
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Check for forbidden files
+      run: |
+        echo "Checking for forbidden files in changes..."
+        if git diff --name-only origin/main...HEAD | grep -E '\.env$|\.sqlite|\.log|\.db$'; then
+          echo "❌ Forbidden files detected in changes!"
+          echo "Please remove .env, .sqlite, .log, or .db files from your commit."
+          exit 1
+        else
+          echo "✅ No forbidden files detected"
+        fi
+
+    - name: Run pip-audit
+      run: pip-audit
+
+    - name: Run bandit
+      run: bandit -r core/ -ll

@@ -1,0 +1,55 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Check for forbidden files
+      run: |
+        echo "Checking for forbidden files in changes..."
+        if git diff --name-only origin/main...HEAD | grep -E '\.env$|\.sqlite|\.log|\.db$'; then
+          echo "❌ Forbidden files detected in changes!"
+          echo "Please remove .env, .sqlite, .log, or .db files from your commit."
+          exit 1
+        else
+          echo "✅ No forbidden files detected"
+        fi
+
+    - name: Run flake8
+      run: flake8 core/ tests/
+
+    - name: Run black (check mode)
+      run: black --check core/ tests/
+
+    - name: Run isort (check mode)
+      run: isort --check core/ tests/
+
+    - name: Run mypy
+      run: mypy core/ --ignore-missing-imports

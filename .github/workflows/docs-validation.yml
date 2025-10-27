@@ -1,0 +1,40 @@
+name: Documentation Validation
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  docs-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install markdownlint-cli2
+      run: npm install -g markdownlint-cli2
+
+    - name: Run markdown linting
+      run: markdownlint-cli2 "**/*.md" "!node_modules" "!diagnostics"
+
+    - name: Check file encoding and line endings
+      run: |
+        echo "Checking markdown files for UTF-8 encoding and LF line endings..."
+        for file in $(find . -name "*.md" -not -path "./node_modules/*" -not -path "./diagnostics/*"); do
+          if file "$file" | grep -q "CRLF"; then
+            echo "❌ $file has CRLF line endings (should be LF)"
+            exit 1
+          fi
+          if ! file "$file" | grep -q "UTF-8"; then
+            echo "❌ $file is not UTF-8 encoded"
+            exit 1
+          fi
+        done
+        echo "✅ All markdown files have correct encoding and line endings"
