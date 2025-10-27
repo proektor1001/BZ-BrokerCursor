@@ -593,8 +593,8 @@ pre-commit run --all-files
 
 ---
 
-**Статус:** ✅ Готов к использованию  
-**Версия:** 0.9.0  
+**Статус:** ✅ Production Ready  
+**Версия:** 1.0.0  
 **Архитектура:** PostgreSQL + JSONB + BeautifulSoup  
 **CI/CD:** GitHub Actions + Pre-commit + Branch Protection  
 **Обновлено:** 2025-10-27
