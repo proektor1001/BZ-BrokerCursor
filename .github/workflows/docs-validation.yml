@@ -27,14 +27,44 @@ jobs:
     - name: Check file encoding and line endings
       run: |
         echo "Checking markdown files for UTF-8 encoding and LF line endings..."
-        for file in $(find . -name "*.md" -not -path "./node_modules/*" -not -path "./diagnostics/*"); do
-          if file "$file" | grep -q "CRLF"; then
-            echo "❌ $file has CRLF line endings (should be LF)"
-            exit 1
-          fi
-          if ! file "$file" | grep -q "UTF-8"; then
-            echo "❌ $file is not UTF-8 encoded"
-            exit 1
-          fi
-        done
-        echo "✅ All markdown files have correct encoding and line endings"
+        python3 -c "
+        import os
+        import glob
+        
+        def check_file_encoding(filepath):
+            try:
+                with open(filepath, 'rb') as f:
+                    content = f.read()
+                    # Check for CRLF line endings
+                    if b'\r\n' in content:
+                        print(f'❌ {filepath} has CRLF line endings (should be LF)')
+                        return False
+                    # Check for UTF-8 encoding
+                    try:
+                        content.decode('utf-8')
+                    except UnicodeDecodeError:
+                        print(f'❌ {filepath} is not UTF-8 encoded')
+                        return False
+                    return True
+            except Exception as e:
+                print(f'❌ Error checking {filepath}: {e}')
+                return False
+        
+        # Find all markdown files
+        md_files = []
+        for pattern in ['**/*.md', '**/*.MD']:
+            md_files.extend(glob.glob(pattern, recursive=True))
+        
+        # Filter out node_modules and diagnostics
+        md_files = [f for f in md_files if 'node_modules' not in f and 'diagnostics' not in f]
+        
+        all_valid = True
+        for file in md_files:
+            if not check_file_encoding(file):
+                all_valid = False
+        
+        if all_valid:
+            print('✅ All markdown files have correct encoding and line endings')
+        else:
+            exit(1)
+        "

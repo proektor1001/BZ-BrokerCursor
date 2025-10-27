@@ -1,0 +1,16 @@
+{
+  "line-length": {
+    "line_length": 80,
+    "code_blocks": false,
+    "tables": false
+  },
+  "no-duplicate-heading": true,
+  "no-trailing-punctuation": false,
+  "no-inline-html": false,
+  "first-line-heading": false,
+  "no-hard-tabs": true,
+  "no-multiple-blanks": true,
+  "no-trailing-spaces": true,
+  "single-title": false,
+  "single-h1": false
+}

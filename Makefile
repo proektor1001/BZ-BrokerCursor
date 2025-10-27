@@ -1,7 +1,7 @@
 # BrokerCursor Makefile
 # Standard CLI shortcuts for project management
 
-.PHONY: help setup init-db migrate import verify stats clean smoke-test sync-external verify-duplicates test-duplicates reorganize-archive
+.PHONY: help setup init-db migrate import verify stats clean smoke-test sync-external verify-duplicates test-duplicates reorganize-archive lint format typecheck security-scan test test-coverage lint-docs check-deps
 
 help:
 	@echo "BrokerCursor - Available Commands:"
@@ -13,6 +13,24 @@ help:
 	@echo "  smoke-test - Run comprehensive smoke test validation"
 	@echo "  stats     - Show database statistics"
 	@echo "  clean     - Remove Python cache files"
+	@echo ""
+	@echo "Code Quality Commands:"
+	@echo "  lint      - Run code quality checks (flake8, black, isort)"
+	@echo "  format    - Auto-format code (black, isort)"
+	@echo "  typecheck - Run type checking (mypy)"
+	@echo ""
+	@echo "Security Commands:"
+	@echo "  security-scan - Run security scans (pip-audit, bandit)"
+	@echo ""
+	@echo "Testing Commands:"
+	@echo "  test         - Run unit tests"
+	@echo "  test-coverage - Run tests with coverage report"
+	@echo ""
+	@echo "Documentation Commands:"
+	@echo "  lint-docs - Lint markdown documentation"
+	@echo ""
+	@echo "Dependency Commands:"
+	@echo "  check-deps - Check for unused dependencies"
 	@echo ""
 	@echo "Duplicate Protection Commands:"
 	@echo "  sync-external     - Sync files from external directory to inbox"
@@ -89,3 +107,44 @@ query-portfolio:
 reparse-sber-portfolio:
 	@echo "Reparsing Sber reports to fix securities_portfolio..."
 	python core/scripts/parse/reparse_sber_reports.py
+
+# Code Quality Commands
+lint:
+	@echo "Running code quality checks..."
+	flake8 core/ tests/
+	black --check core/ tests/
+	isort --check core/ tests/
+
+format:
+	@echo "Formatting code..."
+	black core/ tests/
+	isort core/ tests/
+
+typecheck:
+	@echo "Running type checks..."
+	mypy core/ --ignore-missing-imports
+
+# Security Commands
+security-scan:
+	@echo "Running security scans..."
+	pip-audit
+	bandit -r core/ -ll
+
+# Testing Commands
+test:
+	@echo "Running unit tests..."
+	pytest tests/
+
+test-coverage:
+	@echo "Running tests with coverage..."
+	pytest --cov=core --cov-report=html --cov-report=term tests/
+
+# Documentation Commands
+lint-docs:
+	@echo "Linting documentation..."
+	npx markdownlint-cli2 "**/*.md" "!node_modules" "!diagnostics"
+
+# Dependency Commands
+check-deps:
+	@echo "Checking dependencies..."
+	pip-check
