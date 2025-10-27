@@ -1,0 +1,26 @@
+# BrokerCursor Dependencies
+# PostgreSQL + JSONB Architecture
+
+# Database
+psycopg2-binary==2.9.9
+
+# Environment and Configuration
+python-dotenv==1.0.0
+
+# CLI and Utilities
+click==8.1.7
+rich==13.7.0
+
+# File Processing
+# python-magic==0.4.27  # Requires libmagic system library
+# Using mimetypes instead for simple file type detection
+
+# HTML Parsing
+beautifulsoup4==4.12.2
+lxml==4.9.3
+
+# JSON and Data Processing
+jsonschema==4.20.0
+
+# Logging and Monitoring
+structlog==23.2.0

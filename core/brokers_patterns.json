@@ -1,0 +1,84 @@
+{
+  "sber": {
+    "filename_patterns": [
+      "4000T49",
+      "S000T49", 
+      "сбер",
+      "sber",
+      "сбербанк",
+      "sberbank"
+    ],
+    "html_patterns": [
+      "сбербанк",
+      "sberbank",
+      "отчет брокера",
+      "брокерский отчет",
+      "сбербанк инвестиции",
+      "sberbank investments"
+    ],
+    "priority": "high"
+  },
+  "tinkoff": {
+    "filename_patterns": [
+      "tinkoff",
+      "тинькофф",
+      "т-инвестиции",
+      "t-invest"
+    ],
+    "html_patterns": [
+      "тинькофф",
+      "tinkoff",
+      "т-инвестиции",
+      "tinkoff investments",
+      "т-банк"
+    ],
+    "priority": "high"
+  },
+  "vtb": {
+    "filename_patterns": [
+      "vtb",
+      "втб",
+      "втб капитал"
+    ],
+    "html_patterns": [
+      "втб",
+      "vtb",
+      "втб капитал",
+      "vtb capital",
+      "втб инвестиции"
+    ],
+    "priority": "high"
+  },
+  "gazprombank": {
+    "filename_patterns": [
+      "газпромбанк",
+      "gazprombank",
+      "газпром"
+    ],
+    "html_patterns": [
+      "газпромбанк",
+      "gazprombank",
+      "газпром",
+      "gazprom"
+    ],
+    "priority": "medium"
+  },
+  "alpha": {
+    "filename_patterns": [
+      "альфа",
+      "alpha",
+      "альфа-банк"
+    ],
+    "html_patterns": [
+      "альфа",
+      "alpha",
+      "альфа-банк",
+      "alpha bank",
+      "альфа инвестиции"
+    ],
+    "priority": "medium"
+  },
+  "unknown": {
+    "priority": "fallback"
+  }
+}

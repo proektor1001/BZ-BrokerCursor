@@ -1,0 +1,19 @@
+{
+  "version": "1.0.0",
+  "created": "2025-01-22",
+  "description": "Индекс всех отчётов брокеров в системе BZ-BrokerCursor",
+  "architecture": "PostgreSQL + JSONB + GPT",
+  "supported_formats": [".html", ".txt", ".pdf", ".md"],
+  "reports": [],
+  "statistics": {
+    "total_reports": 0,
+    "by_broker": {},
+    "by_format": {},
+    "by_status": {
+      "pending": 0,
+      "processed": 0,
+      "archived": 0
+    }
+  },
+  "last_updated": "2025-01-22T00:00:00Z"
+}
