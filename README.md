@@ -1,5 +1,11 @@
 # BrokerCursor
 
+[![Code Quality](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/code-quality.yml/badge.svg)](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/code-quality.yml)
+[![Security Scanning](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/security.yml/badge.svg)](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/security.yml)
+[![Unit Tests](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/unit-tests.yml)
+[![Documentation Validation](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/docs-validation.yml/badge.svg)](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/docs-validation.yml)
+[![Dependency Check](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/proektor1001/BZ-BrokerCursor/actions/workflows/dependency-check.yml)
+
 ## Цель проекта
 
 Создать централизованную систему хранения, обработки и анализа брокерских отчётов (HTML, TXT, PDF, MD) с возможностью масштабирования и повторного использования данных.
