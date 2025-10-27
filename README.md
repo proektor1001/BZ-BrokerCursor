@@ -534,6 +534,43 @@ tail -f logs/brokercursor.log
 
 ---
 
+## CI/CD и Качество Кода
+
+### GitHub Actions Workflows
+
+Проект использует комплексную систему CI/CD с 5 основными workflows:
+
+- **Code Quality** — проверка форматирования (black, flake8, isort, mypy)
+- **Security Scan** — анализ безопасности (pip-audit, bandit)
+- **Unit Tests** — запуск тестов с покрытием (pytest, pytest-cov)
+- **Docs Validation** — проверка документации (markdownlint, кодировка)
+- **Dependency Check** — валидация зависимостей (pip-check, дубликаты)
+
+### Pre-commit Hooks
+
+Локальная проверка качества кода перед коммитом:
+
+```bash
+# Установка pre-commit
+pip install pre-commit
+pre-commit install
+
+# Запуск проверок
+pre-commit run --all-files
+```
+
+### Branch Protection
+
+Основная ветка `main` защищена обязательными проверками:
+- Все workflows должны пройти успешно
+- Требуется код-ревью для PR
+- Запрещены прямые коммиты в main
+
+### CODEOWNERS
+
+Файл `.github/CODEOWNERS` определяет ответственность за код:
+- `@proektor1001` — архитектура, БД, CI/CD, конфигурация
+
 ## AI-интеграция (опционально)
 
 ### Текущая позиция
@@ -559,4 +596,5 @@ tail -f logs/brokercursor.log
 **Статус:** ✅ Готов к использованию  
 **Версия:** 0.9.0  
 **Архитектура:** PostgreSQL + JSONB + BeautifulSoup  
-**Обновлено:** 2025-10-24
+**CI/CD:** GitHub Actions + Pre-commit + Branch Protection  
+**Обновлено:** 2025-10-27

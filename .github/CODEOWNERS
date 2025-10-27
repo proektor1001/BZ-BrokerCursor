@@ -1,0 +1,39 @@
+# CODEOWNERS - Code Ownership Configuration
+# This file defines who is responsible for reviewing changes to specific parts of the codebase.
+
+# Core architecture and database components
+/core/ @proektor1001
+/core/database/ @proektor1001
+/core/parsers/ @proektor1001
+/core/utils/ @proektor1001
+/core/config.py @proektor1001
+
+# CI/CD and workflows
+/.github/ @proektor1001
+/Makefile @proektor1001
+
+# Configuration files
+*.yml @proektor1001
+*.yaml @proektor1001
+.env.example @proektor1001
+pyproject.toml @proektor1001
+requirements.txt @proektor1001
+.flake8 @proektor1001
+.bandit @proektor1001
+.markdownlint-cli2.jsonc @proektor1001
+
+# Documentation
+README.md @proektor1001
+CHANGELOG.md @proektor1001
+ROADMAP.md @proektor1001
+RELEASE_NOTES_*.md @proektor1001
+
+# Project structure files
+VERSION.txt @proektor1001
+pytest.ini @proektor1001
+
+# Database schema
+core/database/schema.sql @proektor1001
+
+# Broker patterns configuration
+core/brokers_patterns.json @proektor1001

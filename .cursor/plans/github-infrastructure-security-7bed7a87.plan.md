@@ -16,11 +16,11 @@ Configure branch protection for `main` branch via GitHub API:
 - Require pull request reviews before merging
 - Require status checks to pass before merging
 - **Status checks to require (all must pass):**
-        - `code-quality`
-        - `security-scan`
-        - `unit-tests`
-        - `docs-validation`
-        - `dependency-check`
+                - `code-quality`
+                - `security-scan`
+                - `unit-tests`
+                - `docs-validation`
+                - `dependency-check`
 - Require branches to be up to date before merging
 - Include administrators (optional)
 - Restrict direct pushes to main
