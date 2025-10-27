@@ -11,7 +11,7 @@ mypy==1.8.0
 psycopg2-binary==2.9.9
 
 # Dependency Management
-pip-check==2.0.0
+pip-check==3.2.1
 
 # Environment and Configuration
 python-dotenv==1.0.0
