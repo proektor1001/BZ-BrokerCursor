@@ -14,7 +14,7 @@ psycopg2-binary==2.9.9
 pip-check==2.0.0
 
 # Environment and Configuration
-python-dotenv==1.0.0
+python-dotenv==1.2.1
 
 # CLI and Utilities
 click==8.1.7
